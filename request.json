@@ -1,0 +1,10 @@
+{
+    "from_email": "duotech.software@gmail.com",
+    "from_name": "Carlos",
+    "list_email": [
+        "carlos.alpi21@gmail.com"
+    ],
+    "list_cc": [],
+    "subject": "Subject test sendgrid",
+    "content_html": "<h1>TEST sendgrid</h1>"
+}

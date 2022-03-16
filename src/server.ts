@@ -12,6 +12,7 @@ client.setApiKey(process.env.SENDGRID_API_KEY);
 
 const port = process.env.PORT || 3000;
 
+// POST TO http://localhost:3000/send_email with body from example "request.json"
 app.post("/send_email", async (req, res) => {
     logger.info('Received email');
     logger.info(req.body);

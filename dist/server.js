@@ -22,6 +22,7 @@ const app = (0, express_1.default)(); // create an instance of express
 app.use(body_parser_1.default.json()); // support json encoded bodies
 mail_1.default.setApiKey(process.env.SENDGRID_API_KEY);
 const port = process.env.PORT || 3000;
+// POST TO http://localhost:3000/send_email with body from example "request.json"
 app.post("/send_email", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     logger.info('Received email');
     logger.info(req.body);
