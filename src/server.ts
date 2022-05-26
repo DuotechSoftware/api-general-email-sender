@@ -1,14 +1,18 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import client from '@sendgrid/mail';
+import cors from 'cors';
 import { Logger } from 'tslog'; // TODO: remove tslog dependency in production
 
 const logger = new Logger();
 logger.info('Starting server');
 const app = express();  // create an instance of express
 app.use(bodyParser.json()); // support json encoded bodies
+app.use(cors());
 
-client.setApiKey(process.env.SENDGRID_API_KEY);
+client.setApiKey(process.env.SENDGRID_API_KEY || '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');
+
+logger.info('Starting server with api key: ' + process.env.SENDGRID_API_KEY);
 
 const port = process.env.PORT || 3000;
 

@@ -15,12 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_1 = __importDefault(require("express"));
 const mail_1 = __importDefault(require("@sendgrid/mail"));
+const cors_1 = __importDefault(require("cors"));
 const tslog_1 = require("tslog"); // TODO: remove tslog dependency in production
 const logger = new tslog_1.Logger();
 logger.info('Starting server');
 const app = (0, express_1.default)(); // create an instance of express
 app.use(body_parser_1.default.json()); // support json encoded bodies
-mail_1.default.setApiKey(process.env.SENDGRID_API_KEY);
+app.use((0, cors_1.default)());
+mail_1.default.setApiKey(process.env.SENDGRID_API_KEY || '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');
+logger.info('Starting server with api key: ' + process.env.SENDGRID_API_KEY);
 const port = process.env.PORT || 3000;
 // POST TO http://localhost:3000/send_email with body from example "request.json"
 app.post("/send_email", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
