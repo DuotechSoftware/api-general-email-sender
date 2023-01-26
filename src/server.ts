@@ -10,7 +10,14 @@ const logger = new Logger();
 logger.info('Starting server');
 const app = express();  // create an instance of express
 app.use(bodyParser.json()); // support json encoded bodies
-app.use(cors());
+// app.use(cors());
+
+/* const corsOptions = {
+    origin: "*",
+
+  } */
+
+app.options('*', cors())
 
 client.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -19,7 +26,7 @@ logger.info('Starting server with api key: ' + process.env.SENDGRID_API_KEY);
 const port = process.env.PORT || 3000;
 
 // POST TO http://localhost:3000/send_email with body from example "request.json"
-app.post("/send_email", async (req, res) => {
+app.post("/send_email", cors(), async (req, res) => {
     logger.info('Received email');
     logger.info(req.body);
     if (req.body === undefined) {

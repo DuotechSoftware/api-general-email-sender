@@ -46,12 +46,17 @@ const logger = new tslog_1.Logger();
 logger.info('Starting server');
 const app = (0, express_1.default)(); // create an instance of express
 app.use(body_parser_1.default.json()); // support json encoded bodies
-app.use((0, cors_1.default)());
+// app.use(cors());
+/* const corsOptions = {
+    origin: "*",
+
+  } */
+app.options('*', (0, cors_1.default)());
 mail_1.default.setApiKey(process.env.SENDGRID_API_KEY);
 logger.info('Starting server with api key: ' + process.env.SENDGRID_API_KEY);
 const port = process.env.PORT || 3000;
 // POST TO http://localhost:3000/send_email with body from example "request.json"
-app.post("/send_email", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post("/send_email", (0, cors_1.default)(), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     logger.info('Received email');
     logger.info(req.body);
     if (req.body === undefined) {
